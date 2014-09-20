@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html data-ng-app="PrimeResume">
+	<head>
+		<title>primeproc</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript">
+			if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+				var msViewportStyle = document.createElement("style");
+				var mq = "@@-ms-viewport{width:auto!important}";
+				msViewportStyle.appendChild(document.createTextNode(mq));
+				document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+			}
+		</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+		<script type="text/javascript" src="/static/lib/angular/ui-bootstrap-0.11.0.js"></script>
+		<script type="text/javascript" src="/static/lib/angular/ui-bootstrap-tpls-0.11.0.js"></script>
+		<script type="text/javascript" src="/js/app.js"></script>
+	</head>
+	<body>
+		<div class="container" id="applicationHost" ng-controller="resumeController">
+			<form name="applicationForm" novalidate role="form">
+			<h1>Application Form</h1>
+			<div class="row bg-danger" ng-show="applicationForm.$invalid">
+				<p>
+				Fill mandatory fields.
+				</p>
+			</div>
+			<h2>Personal Data</h2>
+			<div class="row">
+				<div class="form-group" ng-class="{'has-error': applicationForm.name.$invalid}">
+					<label for="">Name:</label>
+					<input name="name" type="text" class="form-control" ng-model="name" required/>
+					<span ng-show="applicationForm.name.$invalid">your name</span>
+				</div>
+				<div class="form-group">
+					<label for="">Telephone:</label>
+					<input type="tel" class="form-control" ng-model="telephone" />
+				</div>
+				<div class="form-group" ng-class="{'has-error': applicationForm.email.$invalid}">
+					<label for="">Email:</label>
+					<input name="email" type="email" class="form-control" ng-model="email" required />
+					<span ng-show="applicationForm.email.$invalid">a valid email</span>
+				</div>
+			</div>
+			<h2>Experience</h2>
+			<div class="row" ng-repeat="item in experiences" ng-model="item">
+				<div class="form-group">
+					<label for="">Position:</label>
+					<input type="text" class="form-control" ng-model="item.position"/>
+				</div>
+				<div class="form-group">
+					<label for="">Company:</label>
+					<input type="text" class="form-control" ng-model="item.company"/>
+				</div>
+				<div class="form-group">
+					<label for="">Location:</label>
+					<input type="text" class="form-control" ng-model="item.location"/>
+				</div>
+				<div class="form-group">
+					<label for="">From (in the format yyyy-MM):</label>
+					<input type="text" class="form-control" ng-model="item.from"/>
+				</div>
+				<div class="form-group">
+					<label for="">To (in the format yyyy-MM):</label>
+					<input type="text" class="form-control" ng-model="item.to"/>
+				</div>
+				<div class="form-group">
+					<label for="">Acomplishments:</label>
+					<textarea rows="10" cols="30" class="form-control" ng-model="item.acomplishments"></textarea>
+				</div>
+				<button class="btn btn-default" ng-click="removeItem('experiences', item)">remove</button>
+				<hr/>
+			</div>
+			<div class="row">
+				<button class="btn btn-primary" ng-click="addItem('experience')">add experience</button>
+			</div>
+			<h2>Education</h2>
+			<div class="row" ng-repeat="item in educations" ng-model="item">
+				<div class="form-group">
+					<label for="">Title:</label>
+					<input class="form-control" type="text" ng-model="item.title"/>
+				</div>
+				<div class="form-group">
+					<label for="">Institution:</label>
+					<input class="form-control" type="text" ng-model="item.institution"/>
+				</div>
+				<div class="form-group">
+					<label for="">From:</label>
+					<input type="text" class="form-control" ng-model="item.from"/>
+				</div>
+				<div class="form-group">
+					<label for="">To:</label>
+					<input type="text" class="form-control" ng-model="item.to"/>
+				</div>
+				<div class="form-group">
+					<label for="">Location:</label>
+					<input type="" class="form-control" ng-model="item.location"/>
+				</div>
+				<button class="btn btn-default" ng-click="removeItem('educations', item)">remove</button>
+				<hr/>
+			</div>
+			<div class="row">
+				<button class="btn btn-primary" ng-click="addItem('education')">add education</button>
+			</div>
+			<h2>Technical Skills</h2>
+			<div class="row" ng-repeat="item in skills" ng-model="item">
+				<div class="form-group">
+					<label for="">Skill:</label>
+					<input type="text" class="form-control" ng-model="item.name"/>
+				</div>
+				<div class="form-group">
+					<label for="">Years:</label>
+					<input type="text" class="form-control" ng-model="item.years"/>
+				</div>
+				<div class="form-group">
+					<label for="">Level:</label>
+					<select class="form-control" ng-model="item.level" ng-options="level for level in skillLevels"></select>
+				</div>
+				<button class="btn btn-default" ng-click="removeItem('skills',item)">remove</button>
+				<hr/>
+			</div>
+			<div class="row">
+				<button class="btn btn-primary" ng-click="addItem('skill')">add skill</button>
+			</div>
+			<h2>Language Skills</h2>
+			<div class="row" ng-repeat="item in languages" ng-model="item">
+				<div class="form-group">
+					<label for="">Language:</label>
+					<select class="form-control" ng-model="item.name" ng-options="opt for opt in languageOptions"></select>
+				</div>
+				<div class="form-group">
+					<label for="">Level:</label>
+					<select class="form-control" ng-model="item.level" ng-options="level for level in languageLevels"></select>
+				</div>
+				<button class="btn btn-default" ng-click="removeItem('languages', item)">remove</button>
+				<hr/>
+			</div>
+			<div class="row">
+				<button class="btn btn-primary" ng-click="addItem('language')">add language</button>
+			</div>
+			<h2>Certification</h2>
+			<div class="row" ng-repeat="item in certifications" ng-model="item">
+				<div class="form-group">
+					<label for="">Title:</label>
+					<input type="text" class="form-control" ng-model="item.title"/>
+				</div>
+				<div class="form-group">
+					<label for="">Institution:</label>
+					<input type="text" class="form-control" ng-model="item.institution"/>
+				</div>
+				<div class="form-group">
+					<label for="">Date:</label>
+					<input type="text" class="form-control" ng-model="item.date"/>
+				</div>
+				<button class="btn btn-default" ng-click="removeItem('certifications', item)">remove</button>
+				<hr/>
+			</div>
+			<div class="row">
+				<button class="btn btn-primary" ng-click="addItem('certification')">add certification</button>
+			</div>
+			<br/>
+			<br/>
+			<div class="row">
+				<button class="btn btn-primary btn-lg" ng-click="submit()" ng-disabled="sending">Submit</button>
+				<button class="btn btn-default" ng-click="cancel()" ng-disabled="!sending">Cancel</button>
+			</div>
+			<div class="row" ng-show="sending">
+				sending ...
+			</div>
+			</form>
+		</div>
+		<script type="text/ng-template" id="myModalContent.html">
+			<div class="modal-header">
+				<h3 class="modal-title bg-danger">Failed submitting application</h3>
+			</div>
+			<div class="modal-body">
+				<textarea class="form-control" rows="10" cols="30" ng-model="data">
+				</textarea>
+			</div>
+			<p>Please copy the data above and send it by email to <a href="mailto:contact@primefactor.solutions">contact@primefactor.solutions</a></p>
+			<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="ok()">OK</button>
+			</div>
+		</script>
+	</body>
+</html>
