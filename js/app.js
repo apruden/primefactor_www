@@ -7,7 +7,7 @@ app.factory('resourceDataService', function ($http, $modal) {
     var _submit = function (data) {
         return $http.post('/api/apply', data).success(
             function (results) {
-                window.location = '/careers/apply_success.html';
+                window.location = '/careers/apply_success';
             }).error(
             function (results) {
                 var modalInstance = $modal.open({
