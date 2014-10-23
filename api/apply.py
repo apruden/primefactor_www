@@ -35,7 +35,7 @@ class ApplyHandler(object):
 			return
 
 		entry = ndb.Key(DataEntry, 'application:%s' % email).get()
-		doc = JINJA_SITE_ENVIRONMENT.get_template('/templates/application').render(json.loads(entry.data))
+		doc = JINJA_SITE_ENVIRONMENT.get_template('/templates/application.html').render(json.loads(entry.data))
 		self.response.write(doc)
 
 
