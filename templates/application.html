@@ -43,8 +43,9 @@
 		    <dt>Experience</dt>
 		    <dd>
 			{% for e in experiences %}
-			<h2>{{e.company}} <span>{{e.position}} - {{e.from}} to {{e.to}}</span></h2>
-			<h2><span>{{e.location}}</span></h2>
+			<h2>{{e.company}} <span>{{e.position}}</span></h2>
+			<br/>
+			<h2><span>{{e.location}}, {{e.from}} to {{e.to}}</span></h2>
 			<p>{{e.acomplishments}}</p>
 			{% endfor %}
 		    </dd>
