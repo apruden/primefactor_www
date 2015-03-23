@@ -28,10 +28,6 @@
 	    <div id="page-wrap">
 		<div id="contact-info" class="vcard">
 	  	    <h1 class="fn">{{name}}</h1>
-		    <p>
-		    Phone: <span class="tel">{{telephone}}</span><br />
-		    Email: <a class="email" href="mailto:{{email}}">{{email}}</a>
-		    </p>
 		</div>
 		<div class="clear"></div>
 		<dl>
@@ -47,7 +43,7 @@
 		    <dt>Experience</dt>
 		    <dd>
 			{% for e in experiences %}
-			<h2>{{e.company}} <span>{{e.position}} - {{e.from}}-{{e.to}}</span></h2>
+			<h2>{{e.company}} <span>{{e.position}} - {{e.from}} to {{e.to}}</span></h2>
 			<p>{{e.acomplishments}}</p>
 			{% endfor %}
 		    </dd>
