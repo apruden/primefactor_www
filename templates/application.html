@@ -36,7 +36,7 @@
 		    <dd>
 			{% for e in educations %}
 			<h2>{{e.title}}</h2>
-			<p>{{e.institution}}, {{e.from}} - {{e.to}}</p>
+			<p>{{e.institution}}, {{e.location}}, {{e.from}} - {{e.to}}</p>
 			{% endfor %}
 		    </dd>
 		    <dd class="clear"></dd>
@@ -44,6 +44,7 @@
 		    <dd>
 			{% for e in experiences %}
 			<h2>{{e.company}} <span>{{e.position}} - {{e.from}} to {{e.to}}</span></h2>
+			<h2><span>{{e.location}}</span></h2>
 			<p>{{e.acomplishments}}</p>
 			{% endfor %}
 		    </dd>
@@ -66,7 +67,7 @@
 		    <dd>
 			{% for e in certifications %}
 			<h2>{{e.title}}</h2>
-			<p>{{e.institution}}, {{e.date}}</p>
+			<p>{{e.institution}}, {{e.location}}, {{e.date}}</p>
 			{% endfor %}
 		    </dd>
 		    <dd class="clear"></dd>
