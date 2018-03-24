@@ -1,0 +1,24 @@
+{% extends "/_layout.html" %}
+{% block content %}
+{% raw %}
+    <section id="applications" class="container content-section" ng-app="applications" ng-controller="Main">
+      <ul>
+        <li ng-repeat="application in applications">
+        <span>{{application.email}}</span>
+        <a ng-href="/api/apply?id={{application.email}}&download=1">download</a>
+        </li>
+      </ul>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-resource.js"></script>
+
+<script>
+angular.module('applications', ['ngResource']).controller('Main', function($scope, Application) {
+    $scope.applications = Application.query();
+    }).factory('Application', function($resource) {
+      return $resource('/api/apply');
+      });
+    </script>
+{% endraw %}
+{% endblock %}
+
